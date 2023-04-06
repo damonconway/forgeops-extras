@@ -2,4 +2,4 @@
 terraform_dir=$(pwd $(dirname $0))
 
 set -e
-$terraform_dir/tf --apply --generate $*
+$terraform_dir/tf apply generate $*

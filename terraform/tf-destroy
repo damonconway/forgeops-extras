@@ -3,4 +3,4 @@
 terraform_dir=$(pwd $(dirname $0))
 
 set -e
-$terraform_dir/tf --destroy $*
+$terraform_dir/tf destroy $*
