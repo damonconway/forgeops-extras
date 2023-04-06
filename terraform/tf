@@ -1,0 +1,45 @@
+#!/bin/bash
+
+terraform_dir=$(pwd $(dirname $0))
+terraform_bin=$(type -p terraform)
+if [ -z "$terraform_bin" ]; then
+    echo "Could not find terraform binary in PATH.  Exiting."
+    exit 1
+fi
+terraform="$terraform_bin -chdir=$terraform_dir"
+
+set -e
+
+generate() {
+  $terraform init -upgrade
+  $terraform apply -target=local_file.clusters -auto-approve -compact-warnings $*
+}
+
+GENERATE=false
+APPLY=false
+DESTROY=false
+
+while true ; do
+  case "$1" in
+    --apply) APPLY=true ; shift ;;
+    --destroy) DESTROY=true ; shift ;;
+    --generate) GENERATE=true ; shift ;;
+    *) break ;;
+  esac
+done
+
+if [ "$APPLY" = false ] && [ "$GENERATE" = false ] && [ "$DESTROY" = false ] ; then
+  APPLY=true
+fi
+
+if [ "$APPLY" = true ] ; then
+  if [ ! -f "clusters.tf" ] || [ "$GENERATE" = true ] ; then
+    generate
+  fi
+  $terraform init -upgrade
+  $terraform apply $*
+elif [ "$DESTROY" = true ] ; then
+  terraform destroy $*
+elif [ "$GENERATE" = true ] ; then
+  generate
+fi
