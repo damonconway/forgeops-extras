@@ -11,7 +11,7 @@ terraform="$terraform_bin -chdir=$terraform_dir"
 set -e
 
 if [ ! -f "clusters.tf" ] ; then
-  ./tf-generate $*
+  ./tf-generate -auto-approve $*
 fi
 
 $terraform init -upgrade
