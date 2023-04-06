@@ -9,10 +9,8 @@ fi
 terraform="$terraform_bin -chdir=$terraform_dir"
 
 set -e
-
-if [ ! -f "clusters.tf" ] ; then
-  ./tf-generate $*
-fi
-
+$terraform init -upgrade
+$terraform apply -target=local_file.clusters -auto-approve -compact-warnings $*
 $terraform init -upgrade
 $terraform apply $*
+
