@@ -1,7 +1,7 @@
 # main.tf - root module
 
 resource "local_file" "clusters" {
-  filename             = "${path.module}/../../clusters.tf"
+  filename             = "${path.module}/clusters.tf"
   file_permission      = "0664"
   directory_permission = "0775"
 
@@ -52,6 +52,7 @@ resource "local_file" "clusters" {
       kubernetes = kubernetes.${key}
       helm       = helm.${key}
     }
+    depends_on = [local_file.clusters]
   }
 
   output "${key}" {
@@ -105,6 +106,7 @@ resource "local_file" "clusters" {
       kubernetes = kubernetes.${key}
       helm       = helm.${key}
     }
+    depends_on = [local_file.clusters]
   }
 
   output "${key}" {
@@ -158,6 +160,7 @@ resource "local_file" "clusters" {
       kubernetes = kubernetes.${key}
       helm       = helm.${key}
     }
+    depends_on = [local_file.clusters]
   }
 
   output "${key}" {
@@ -166,3 +169,4 @@ resource "local_file" "clusters" {
   %{ endfor }
   EOF
 }
+
