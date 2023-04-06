@@ -12,19 +12,21 @@ set -e
 
 generate() {
   $terraform init -upgrade
-  $terraform apply -target=local_file.clusters -auto-approve -compact-warnings $*
+  $terraform apply -target=local_file.clusters -auto-approve -compact-warnings ${TF_ARGS[@]}
 }
 
 GENERATE=false
 APPLY=false
 DESTROY=false
+TF_ARGS=()
 
 while true ; do
   case "$1" in
-    --apply) APPLY=true ; shift ;;
-    --destroy) DESTROY=true ; shift ;;
-    --generate) GENERATE=true ; shift ;;
-    *) break ;;
+    apply) APPLY=true ; shift ;;
+    destroy) DESTROY=true ; shift ;;
+    generate) GENERATE=true ; shift ;;
+    "") break ;;
+    *) TF_ARGS+=($1) ; shift ;;
   esac
 done
 
@@ -37,9 +39,9 @@ if [ "$APPLY" = true ] ; then
     generate
   fi
   $terraform init -upgrade
-  $terraform apply $*
+  $terraform apply ${TF_ARGS[@]}
 elif [ "$DESTROY" = true ] ; then
-  terraform destroy $*
+  terraform destroy ${TF_ARGS[@]}
 elif [ "$GENERATE" = true ] ; then
   generate
 fi
