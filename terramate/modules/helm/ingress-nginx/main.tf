@@ -12,8 +12,6 @@ locals {
     timeout               = 600
   }
 
-  app_merged = merge(local.app_defaults, var.app)
-
   values_defaults = <<-EOF
   # Values from terraform helm module
   controller:
@@ -38,7 +36,7 @@ module "ingress_nginx" {
 
   namespace     = var.namespace
   repository    = var.repository
-  app           = local.app_merged
+  app           = merge(local.app_defaults, var.app)
   set           = var.set
   set_sensitive = var.set_sensitive
   values        = flatten([local.values_defaults, var.values])
