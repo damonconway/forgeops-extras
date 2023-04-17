@@ -22,7 +22,7 @@ module "ingress_nginx" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terraform/modules/helm/ingress-nginx"
+  source = "../../../../../../../terramate/modules/helm/ingress-nginx"
   values = flatten([
     local.passed_values,
     local.values,
