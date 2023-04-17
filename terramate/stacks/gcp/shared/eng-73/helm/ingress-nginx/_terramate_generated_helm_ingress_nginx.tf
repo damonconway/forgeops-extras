@@ -25,6 +25,6 @@ module "ingress_nginx" {
   source = "../../../../../../../terraform/modules/helm/ingress-nginx"
   values = flatten([
     local.passed_values,
-    yamlencode(local.values),
+    local.values,
   ])
 }
