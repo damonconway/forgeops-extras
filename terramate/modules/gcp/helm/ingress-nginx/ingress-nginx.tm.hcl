@@ -29,7 +29,7 @@ generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
       app           = global.app
       namespace     = global.namespace
       repository    = global.repository
-      values        = flatten([local.passed_values, yamlencode(local.values)])
+      values        = flatten([local.passed_values, local.values])
       set           = global.set
       set_sensitive = global.set_sensitive
     }
