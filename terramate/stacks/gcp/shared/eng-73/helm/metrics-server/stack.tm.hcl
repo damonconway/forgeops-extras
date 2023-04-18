@@ -1,8 +1,7 @@
 stack {
-  id          = "eng-73-shared_metrics-server"
-  description = "Metrics Server"
+  name = "Metrics Server chart"
 
   after = [
-    "/terramate/stacks/gcp/shared/eng-73/gke"
+    "../../gke"
   ]
 }

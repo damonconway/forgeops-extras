@@ -1,8 +1,7 @@
 stack {
-  id          = "eng-73-shared_external-dns"
-  description = "Metrics Server"
+  name = "External DNS chart"
 
   after = [
-    "/terramate/stacks/gcp/shared/eng-73/gke"
+    "../../gke"
   ]
 }

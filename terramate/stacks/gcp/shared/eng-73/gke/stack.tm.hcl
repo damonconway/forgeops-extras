@@ -1,3 +1,3 @@
 stack {
-  name = "Kubernetes cluster - eng-73-shared"
+  name = "GKE cluster"
 }
