@@ -12,21 +12,26 @@ locals {
     timeout               = 600
   }
 
-  values_defaults = <<-EOF
-  controller:
-    kind: Deployment
-    replicaCount: 2
-    service:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      omitClusterIP: true
-    publishService:
-      enabled: true
-    stats:
-      enabled: true
-      service:
-        omitClusterIP: true
-  EOF
+  values_defaults = {
+    controller = {
+      kind         = "Deployment"
+      replicaCount = 2
+      service = {
+        type                  = "LoadBalancer"
+        externalTrafficPolicy = "Local"
+        omitClusterIP         = true
+      }
+      publishService = {
+        enabled = true
+      }
+      stats = {
+        enabled = true
+        service = {
+          omitClusterIP = true
+        }
+      }
+    }
+  }
 }
 
 module "ingress_nginx" {
@@ -38,5 +43,5 @@ module "ingress_nginx" {
   app           = merge(local.app_defaults, var.app)
   set           = var.set
   set_sensitive = var.set_sensitive
-  values        = flatten([local.values_defaults, var.values])
+  values        = flatten([yamlencode(local.values_defaults), var.values])
 }
