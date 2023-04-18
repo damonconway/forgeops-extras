@@ -3,7 +3,7 @@ globals {
     app           = {}
     namespace     = null
     repository    = null
-    values        = []
+    values        = {}
     set           = []
     set_sensitive = []
   }
@@ -12,7 +12,6 @@ globals {
 generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
   content {
     locals {
-      passed_values = global.ingress_nginx_config.values
       values = {
         controller = {
           service = {
@@ -33,7 +32,7 @@ generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
       app           = global.ingress_nginx_config.app
       namespace     = global.ingress_nginx_config.namespace
       repository    = global.ingress_nginx_config.repository
-      values        = flatten([local.passed_values, yamlencode(local.values)])
+      values        = [yamlencode(global.ingress_nginx_config.values), yamlencode(local.values)])
       set           = global.ingress_nginx_config.set
       set_sensitive = global.ingress_nginx_config.set_sensitive
     }
