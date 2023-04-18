@@ -3,7 +3,6 @@ locals {
     name                  = "ingress-nginx",
     chart                 = "ingress-nginx",
     version               = "4.1.1",
-    namespace             = "ingress-nginx"
     create_namespace      = true
     reuse_values          = false
     reset_values          = true

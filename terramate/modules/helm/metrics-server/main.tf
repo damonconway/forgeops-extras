@@ -3,7 +3,6 @@ locals {
     name                  = "metrics-server"
     chart                 = "metrics-server"
     version               = "3.7.0"
-    namespace             = "kube-system"
     reuse_values          = false
     reset_values          = true
     max_history           = 12
