@@ -5,4 +5,6 @@ globals {
 
   project  = global.terraform_google_provider_project
   location = global.terraform_google_provider_region
+
+  gke_data_config_map_name = "gke-data"
 }

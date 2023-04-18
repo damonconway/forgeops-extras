@@ -77,9 +77,9 @@ globals {
 generate_hcl "_terramate_generated_gke.tf" {
   content {
     locals {
-      common_labels            = global.common_labels
-      cluster_resource_labels  = global.gke_config.cluster_resource_labels
-      terramate_data_namespace = global.terramate_data_namespace
+      common_labels              = global.common_labels
+      cluster_resource_labels    = global.gke_config.cluster_resource_labels
+      k8s_data_sharing_namespace = global.k8s_data_sharing_namespace
     }
 
     module "gke" {
@@ -119,14 +119,14 @@ generate_hcl "_terramate_generated_gke.tf" {
 
     resource "kubernetes_namespace" {
       metadata {
-        name = local.terramate_data_namespace
+        name = local.k8s_data_sharing_namespace
       }
     }
 
     resource "kubernetes_config_map" {
       metadata {
         name      = global.gke_data_config_map_name
-        namespace = local.terramate_data_namespace
+        namespace = local.k8s_data_sharing_namespace
 
         data = {
           identity_namespace = module.gke.identity_namespace

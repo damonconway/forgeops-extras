@@ -13,4 +13,6 @@ globals {
     es_managedby    = "forgeops"
     es_zone         = "dev"
   }
+
+  k8s_data_sharing_namespace = "terramate-data"
 }
