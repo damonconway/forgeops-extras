@@ -1,8 +1,6 @@
 // TERRAMATE: GENERATED AUTOMATICALLY DO NOT EDIT
 
 locals {
-  passed_values = [
-  ]
   values = {
     controller = {
       service = {
@@ -24,8 +22,8 @@ module "ingress_nginx" {
   set_sensitive = [
   ]
   source = "/terramate/modules/helm/ingress-nginx"
-  values = flatten([
-    local.passed_values,
+  values = [
+    yamlencode({}),
     yamlencode(local.values),
-  ])
+  ]
 }
