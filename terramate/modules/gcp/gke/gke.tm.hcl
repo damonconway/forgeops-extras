@@ -83,7 +83,7 @@ generate_hcl "_terramate_generated_gke.tf" {
 
     module "gke" {
       source  = "terraform-google-modules/kubernetes-engine/google"
-      version = global.module_version
+      version = global.gke_config.module_version
 
       project_id                           = global.gke_config.project_id
       name                                 = global.gke_config.name
