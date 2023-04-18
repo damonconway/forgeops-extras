@@ -24,9 +24,15 @@ resource "google_project_iam_member" "external_dns_admin" {
   role    = "roles/dns.admin"
 }
 resource "google_service_account_iam_member" "external_dns_workload_identity_user" {
-  member             = "serviceAccount:${module.gke.identity_namespace}[external-dns/external-dns]"
+  member             = "serviceAccount:${kubernetes_config_map.gke_data.data.identity_namespace}[external-dns/external-dns]"
   role               = "roles/iam.workloadIdentityUser"
   service_account_id = google_service_account.external_dns.name
+}
+data "kubernetes_config_map" "gke_data" {
+  metadata {
+    name      = "gke-data"
+    namespace = "terramate-data"
+  }
 }
 module "external_dns" {
   app        = {}

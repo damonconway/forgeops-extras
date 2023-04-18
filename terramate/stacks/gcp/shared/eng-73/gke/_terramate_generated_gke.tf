@@ -11,6 +11,7 @@ locals {
     es_useremail    = "damon_conway"
     es_zone         = "dev"
   }
+  k8s_data_sharing_namespace = "terramate-data"
 }
 module "gke" {
   cluster_autoscaling = {
@@ -45,6 +46,12 @@ module "gke" {
   network_project_id                   = ""
   node_pools = [
     {
+      initial_node_count = 0
+      max_count          = 0
+      min_count          = 0
+      name               = "default"
+    },
+    {
       auto_repair        = true
       auto_upgrade       = true
       disk_size_gb       = 50
@@ -57,7 +64,23 @@ module "gke" {
       max_count          = 6
       min_count          = 3
       min_cpu_platform   = ""
-      name               = "default"
+      name               = "blue"
+      preemptible        = false
+    },
+    {
+      auto_repair        = true
+      auto_upgrade       = true
+      disk_size_gb       = 50
+      disk_type          = "pd-ssd"
+      enable_gcfs        = true
+      image_type         = "COS_CONTAINERD"
+      initial_node_count = 0
+      local_ssd_count    = 0
+      machine_type       = "n2-standard-8"
+      max_count          = 0
+      min_count          = 0
+      min_cpu_platform   = ""
+      name               = "green"
       preemptible        = false
     },
   ]
@@ -76,6 +99,20 @@ module "gke" {
   version           = "~> 25.0"
   zones = [
   ]
+}
+resource "kubernetes_namespace" {
+  metadata {
+    name = local.k8s_data_sharing_namespace
+  }
+}
+resource "kubernetes_config_map" {
+  metadata {
+    data = {
+      identity_namespace = module.gke.identity_namespace
+    }
+    name      = "gke-data"
+    namespace = local.k8s_data_sharing_namespace
+  }
 }
 output "cluster" {
   value = module.gke
