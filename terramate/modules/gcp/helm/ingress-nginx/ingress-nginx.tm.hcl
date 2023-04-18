@@ -1,16 +1,18 @@
 globals {
-  app           = {}
-  namespace     = null
-  repository    = null
-  values        = []
-  set           = []
-  set_sensitive = []
+  ingress_nginx_config = {
+    app           = {}
+    namespace     = null
+    repository    = null
+    values        = []
+    set           = []
+    set_sensitive = []
+  }
 }
 
 generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
   content {
     locals {
-      passed_values = global.values
+      passed_values = global.metrics_server_config.values
       values        = {
         controller = {
           service = {
@@ -28,12 +30,12 @@ generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
     module "ingress_nginx" {
       source = "/terramate/modules/helm/ingress-nginx"
 
-      app           = global.app
-      namespace     = global.namespace
-      repository    = global.repository
+      app           = global.metrics_server_config.app
+      namespace     = global.metrics_server_config.namespace
+      repository    = global.metrics_server_config.repository
       values        = flatten([local.passed_values, yamlencode(local.values)])
-      set           = global.set
-      set_sensitive = global.set_sensitive
+      set           = global.metrics_server_config.set
+      set_sensitive = global.metrics_server_config.set_sensitive
     }
   }
 }
