@@ -43,7 +43,7 @@ generate_hcl "_terramate_generated_helm_external_dns.tf" {
       member             = "serviceAccount:${kubernetes_config_map.gke_data.data.identity_namespace}[external-dns/external-dns]"
     }
 
-    resource "kubernetes_config_map" "gke_data" {
+    data "kubernetes_config_map" "gke_data" {
       metadata {
         name      = global.gke_data_config_map_name
         namespace = global.k8s_data_sharing_namespace
