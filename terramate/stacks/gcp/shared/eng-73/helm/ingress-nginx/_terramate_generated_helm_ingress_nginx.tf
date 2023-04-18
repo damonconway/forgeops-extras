@@ -3,12 +3,13 @@
 locals {
   passed_values = [
   ]
-  values = <<-EOT
-controller:
-  service:
-    loadBalancerIP: ${google_compute_address.ingress.address}
-EOT
-
+  values = {
+    controller = {
+      service = {
+        loadBalancerIP = google_compute_address.ingress.address
+      }
+    }
+  }
 }
 resource "google_compute_address" "ingress" {
   address_type = "EXTERNAL"
@@ -22,9 +23,9 @@ module "ingress_nginx" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/ingress-nginx"
+  source = "/terramate/modules/helm/ingress-nginx"
   values = flatten([
     local.passed_values,
-    local.values,
+    yamlencode(local.values),
   ])
 }
