@@ -11,11 +11,13 @@ generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
   content {
     locals {
       passed_values = global.values
-      values        = <<-EOT
-        controller:
-          service:
+      values        = {
+        controller = {
+          service = {
             loadBalancerIP: ${google_compute_address.ingress.address}
-      EOT
+          }
+        }
+      }
     }
 
     resource "google_compute_address" "ingress" {
@@ -24,12 +26,12 @@ generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
     }
 
     module "ingress_nginx" {
-      source = "${terramate.stack.path.to_root}/terramate/modules/helm/ingress-nginx"
+      source = "/terramate/modules/helm/ingress-nginx"
 
       app           = global.app
       namespace     = global.namespace
       repository    = global.repository
-      values        = flatten([local.passed_values, local.values])
+      values        = flatten([local.passed_values, yamlencode(local.values)])
       set           = global.set
       set_sensitive = global.set_sensitive
     }

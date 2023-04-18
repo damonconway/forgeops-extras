@@ -13,7 +13,6 @@ locals {
   }
 
   values_defaults = <<-EOF
-  # Values from terraform helm module
   controller:
     kind: Deployment
     replicaCount: 2
