@@ -1,8 +1,8 @@
 locals {
   app_defaults = {
-    name                  = "metrics-server",
-    chart                 = "metrics-server",
-    version               = "3.7.0",
+    name                  = "metrics-server"
+    chart                 = "metrics-server"
+    version               = "3.7.0"
     namespace             = "kube-system"
     reuse_values          = false
     reset_values          = true
@@ -14,13 +14,13 @@ locals {
   values_defaults = {
     priorityClassName = "system-node-critical"
     args = [
-      "--kubelet-preferred-address-types=InternalIP"
+      "--kubelet-preferred-address-types=InternalIP",
       "--kubelet-insecure-tls"
     ]
     service = {
       labels = {
-        kubernetes.io/cluster-service = "true"
-        kubernetes.io/name = "Metrics-server"
+        "kubernetes.io/cluster-service" = "true"
+        "kubernetes.io/name"            = "Metrics-server"
       }
     }
   }
