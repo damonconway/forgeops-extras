@@ -77,8 +77,9 @@ globals {
 generate_hcl "_terramate_generated_gke.tf" {
   content {
     locals {
-      common_labels           = global.common_labels
-      cluster_resource_labels = global.gke_config.cluster_resource_labels
+      common_labels            = global.common_labels
+      cluster_resource_labels  = global.gke_config.cluster_resource_labels
+      terramate_data_namespace = global.terramate_data_namespace
     }
 
     module "gke" {
@@ -114,6 +115,23 @@ generate_hcl "_terramate_generated_gke.tf" {
       node_pools_metadata                  = global.gke_config.node_pools_metadata
       node_pools_taints                    = global.gke_config.node_pools_taints
       node_pools_tags                      = global.gke_config.node_pools_tags
+    }
+
+    resource "kubernetes_namespace" {
+      metadata {
+        name = local.terramate_data_namespace
+      }
+    }
+
+    resource "kubernetes_config_map" {
+      metadata {
+        name      = global.gke_data_config_map_name
+        namespace = local.terramate_data_namespace
+
+        data = {
+          identity_namespace = module.gke.identity_namespace
+        }
+      }
     }
 
     output "cluster" {
