@@ -1,5 +1,5 @@
 stack {
-  name = "Secret Agent chart"
+  name = "DS Operator chart"
 
   after = [
     "../../gke"
