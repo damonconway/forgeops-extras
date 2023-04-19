@@ -1,1 +1,1 @@
-globals "secret-agent_config" {}
+globals "secret_agent_config" {}
