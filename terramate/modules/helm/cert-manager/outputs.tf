@@ -1,3 +1,3 @@
 output "chart" {
-  value = module.metrics_server
+  value = module.cert_manager
 }
