@@ -27,7 +27,7 @@ generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
     }
 
     module "ingress_nginx" {
-      source = "/terramate/modules/helm/ingress-nginx"
+      source = "${terramate.stack.path.to_root}/terramate/modules/helm/ingress-nginx"
 
       app           = global.ingress_nginx_config.app
       namespace     = global.ingress_nginx_config.namespace

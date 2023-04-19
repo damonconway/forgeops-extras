@@ -12,7 +12,7 @@ globals {
 generate_hcl "_terramate_generated_helm_metrics_server.tf" {
   content {
     module "metrics_server" {
-      source = "/terramate/modules/helm/metrics-server"
+      source = "${terramate.stack.path.to_root}/terramate/modules/helm/metrics-server"
 
       app           = global.metrics_server_config.app
       namespace     = global.metrics_server_config.namespace

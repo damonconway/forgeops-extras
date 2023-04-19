@@ -51,7 +51,7 @@ generate_hcl "_terramate_generated_helm_external_dns.tf" {
     }
 
     module "external_dns" {
-      source = "/terramate/modules/helm/external-dns"
+      source = "${terramate.stack.path.to_root}/terramate/modules/helm/external-dns"
 
       app           = global.external_dns_config.app
       namespace     = global.external_dns_config.namespace

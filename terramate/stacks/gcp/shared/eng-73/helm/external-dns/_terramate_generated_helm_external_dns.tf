@@ -42,7 +42,7 @@ module "external_dns" {
   ]
   set_sensitive = [
   ]
-  source = "/terramate/modules/helm/external-dns"
+  source = "../../../../../../../terramate/modules/helm/external-dns"
   values = [
     yamlencode({}),
     yamlencode(local.values),

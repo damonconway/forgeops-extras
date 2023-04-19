@@ -49,7 +49,7 @@ generate_hcl "_terramate_generated_helm_external_secrets.tf" {
     }
 
     module "external_secrets" {
-      source = "/terramate/modules/helm/external-secrets"
+      source = "${terramate.stack.path.to_root}/terramate/modules/helm/external-secrets"
 
       app           = global.external_secrets_config.app
       namespace     = global.external_secrets_config.namespace

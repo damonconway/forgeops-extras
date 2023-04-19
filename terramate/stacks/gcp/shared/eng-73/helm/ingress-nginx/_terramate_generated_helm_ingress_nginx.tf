@@ -21,7 +21,7 @@ module "ingress_nginx" {
   ]
   set_sensitive = [
   ]
-  source = "/terramate/modules/helm/ingress-nginx"
+  source = "../../../../../../../terramate/modules/helm/ingress-nginx"
   values = [
     yamlencode({}),
     yamlencode(local.values),

@@ -37,7 +37,7 @@ module "external_secrets" {
   ]
   set_sensitive = [
   ]
-  source = "/terramate/modules/helm/external-secrets"
+  source = "../../../../../../../terramate/modules/helm/external-secrets"
   values = [
     yamlencode({}),
     yamlencode(local.values),
