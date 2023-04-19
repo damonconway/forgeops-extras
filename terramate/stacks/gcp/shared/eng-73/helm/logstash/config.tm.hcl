@@ -1,0 +1,1 @@
+globals "logstash_config" {}
