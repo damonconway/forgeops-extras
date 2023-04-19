@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_trust_manager.tf" {
     }
 
     output "chart" {
-      value = module.trust_manager
+      value = module.trust_manager.chart
     }
   }
 }

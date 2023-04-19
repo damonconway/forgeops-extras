@@ -12,5 +12,5 @@ module "kube_prometheus_stack" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.kube_prometheus_stack
+  value = module.kube_prometheus_stack.chart
 }

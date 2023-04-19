@@ -101,8 +101,8 @@ module "cluster_issuers" {
   })
 }
 output "chart" {
-  value = module.cert_manager
+  value = module.cert_manager.chart
 }
 output "cluster_issuers" {
-  value = module.cluster_issuers
+  value = module.cluster_issuers.chart
 }

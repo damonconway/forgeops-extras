@@ -12,5 +12,5 @@ module "metrics_server" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.metrics_server
+  value = module.metrics_server.chart
 }

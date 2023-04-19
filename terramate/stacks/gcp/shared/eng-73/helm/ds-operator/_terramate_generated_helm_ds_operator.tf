@@ -12,5 +12,5 @@ module "ds_operator" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.ds_operator
+  value = module.ds_operator.chart
 }

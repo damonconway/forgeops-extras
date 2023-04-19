@@ -27,3 +27,6 @@ module "ingress_nginx" {
     yamlencode(local.values),
   ]
 }
+output "chart" {
+  value = module.ingress_nginx.chart
+}

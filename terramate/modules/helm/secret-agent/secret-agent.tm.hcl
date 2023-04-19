@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_secret_agent.tf" {
     }
 
     output "chart" {
-      value = module.secret_agent
+      value = module.secret_agent.chart
     }
   }
 }

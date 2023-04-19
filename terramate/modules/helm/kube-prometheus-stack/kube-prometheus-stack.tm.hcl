@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_kube_prometheus_stack.tf" {
     }
 
     output "chart" {
-      value = module.kube_prometheus_stack
+      value = module.kube_prometheus_stack.chart
     }
   }
 }

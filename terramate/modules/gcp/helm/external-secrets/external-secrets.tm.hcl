@@ -60,7 +60,7 @@ generate_hcl "_terramate_generated_helm_external_secrets.tf" {
     }
 
     output "chart" {
-      value = module.external_secrets
+      value = module.external_secrets.chart
     }
   }
 }

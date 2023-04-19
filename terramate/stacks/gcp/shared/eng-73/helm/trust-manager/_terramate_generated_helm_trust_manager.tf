@@ -12,5 +12,5 @@ module "trust_manager" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.trust_manager
+  value = module.trust_manager.chart
 }

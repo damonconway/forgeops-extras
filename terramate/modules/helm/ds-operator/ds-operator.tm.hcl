@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_ds_operator.tf" {
     }
 
     output "chart" {
-      value = module.ds_operator
+      value = module.ds_operator.chart
     }
   }
 }

@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_elasticsearch.tf" {
     }
 
     output "chart" {
-      value = module.elasticsearch
+      value = module.elasticsearch.chart
     }
   }
 }

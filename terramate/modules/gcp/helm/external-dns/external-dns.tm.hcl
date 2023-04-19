@@ -62,7 +62,7 @@ generate_hcl "_terramate_generated_helm_external_dns.tf" {
     }
 
     output "chart" {
-      value = module.external_dns
+      value = module.external_dns.chart
     }
   }
 }

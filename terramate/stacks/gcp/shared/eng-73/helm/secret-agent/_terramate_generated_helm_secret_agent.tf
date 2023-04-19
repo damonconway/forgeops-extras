@@ -12,5 +12,5 @@ module "secret_agent" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.secret_agent
+  value = module.secret_agent.chart
 }

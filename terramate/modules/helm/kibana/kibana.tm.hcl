@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_kibana.tf" {
     }
 
     output "chart" {
-      value = module.kibana
+      value = module.kibana.chart
     }
   }
 }

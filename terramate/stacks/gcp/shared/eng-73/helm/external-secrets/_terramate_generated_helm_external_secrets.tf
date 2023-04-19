@@ -44,5 +44,5 @@ module "external_secrets" {
   ]
 }
 output "chart" {
-  value = module.external_secrets
+  value = module.external_secrets.chart
 }

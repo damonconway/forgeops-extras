@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_raw.tf" {
     }
 
     output "chart" {
-      value = module.raw
+      value = module.raw.chart
     }
   }
 }

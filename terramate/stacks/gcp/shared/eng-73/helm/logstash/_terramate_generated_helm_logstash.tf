@@ -12,5 +12,5 @@ module "logstash" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.logstash
+  value = module.logstash.chart
 }

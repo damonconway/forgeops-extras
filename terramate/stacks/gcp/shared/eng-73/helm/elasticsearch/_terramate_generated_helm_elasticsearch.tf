@@ -12,5 +12,5 @@ module "elasticsearch" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.elasticsearch
+  value = module.elasticsearch.chart
 }

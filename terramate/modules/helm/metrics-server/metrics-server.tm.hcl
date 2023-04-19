@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_metrics_server.tf" {
     }
 
     output "chart" {
-      value = module.metrics_server
+      value = module.metrics_server.chart
     }
   }
 }

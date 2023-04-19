@@ -36,5 +36,9 @@ generate_hcl "_terramate_generated_helm_ingress_nginx.tf" {
       set           = global.ingress_nginx_config.set
       set_sensitive = global.ingress_nginx_config.set_sensitive
     }
+
+    output "chart" {
+      value = module.ingress_nginx.chart
+    }
   }
 }

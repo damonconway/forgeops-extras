@@ -12,5 +12,5 @@ module "kibana" {
   values = yamlencode({})
 }
 output "chart" {
-  value = module.kibana
+  value = module.kibana.chart
 }

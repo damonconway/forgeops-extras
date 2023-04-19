@@ -23,7 +23,7 @@ generate_hcl "_terramate_generated_helm_logstash.tf" {
     }
 
     output "chart" {
-      value = module.logstash
+      value = module.logstash.chart
     }
   }
 }
