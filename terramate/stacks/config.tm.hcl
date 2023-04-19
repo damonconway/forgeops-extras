@@ -14,5 +14,7 @@ globals {
     es_zone         = "dev"
   }
 
+  ingress_class              = "nginx"
   k8s_data_sharing_namespace = "terramate-data"
+  letsencrypt_email          = "forgeops-team@forgerock.com"
 }
