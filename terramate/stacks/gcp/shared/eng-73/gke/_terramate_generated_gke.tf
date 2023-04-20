@@ -100,12 +100,12 @@ module "gke" {
   zones = [
   ]
 }
-resource "kubernetes_namespace" {
+resource "kubernetes_namespace" "ns" {
   metadata {
     name = local.k8s_data_sharing_namespace
   }
 }
-resource "kubernetes_config_map" {
+resource "kubernetes_config_map" "config" {
   metadata {
     data = {
       identity_namespace = module.gke.identity_namespace
