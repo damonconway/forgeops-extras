@@ -117,13 +117,13 @@ generate_hcl "_terramate_generated_gke.tf" {
       node_pools_tags                      = global.gke_config.node_pools_tags
     }
 
-    resource "kubernetes_namespace" {
+    resource "kubernetes_namespace" "ns" {
       metadata {
         name = local.k8s_data_sharing_namespace
       }
     }
 
-    resource "kubernetes_config_map" {
+    resource "kubernetes_config_map" "config" {
       metadata {
         name      = global.gke_data_config_map_name
         namespace = local.k8s_data_sharing_namespace
