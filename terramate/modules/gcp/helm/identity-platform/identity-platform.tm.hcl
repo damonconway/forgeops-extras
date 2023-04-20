@@ -24,7 +24,7 @@ generate_hcl "_terramate_generated_helm_identity_platform.tf" {
       }
     }
 
-    data_source "google_compute_address" "ingress" {
+    data "google_compute_address" "ingress" {
       name = "${global.cluster_name}-${global.location}"
     }
 

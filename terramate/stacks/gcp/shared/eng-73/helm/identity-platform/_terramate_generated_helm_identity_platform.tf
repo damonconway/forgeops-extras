@@ -12,7 +12,7 @@ locals {
     }
   }
 }
-data_source "google_compute_address" "ingress" {
+data "google_compute_address" "ingress" {
   name = "eng-73-shared-us-east1"
 }
 module "identity_platform" {
