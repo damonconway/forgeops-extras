@@ -13,7 +13,7 @@ locals {
   }
 }
 data "google_compute_address" "ingress" {
-  name = "cluster1-dev-us-east1"
+  name = "example-cluster1-dev-us-east1"
 }
 module "identity_platform" {
   app        = {}

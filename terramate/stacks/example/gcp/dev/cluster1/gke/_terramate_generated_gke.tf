@@ -39,7 +39,7 @@ module "gke" {
     min_memory_gb = 1
   }
   cluster_resource_labels         = merge(local.common_labels, local.cluster_resource_labels)
-  description                     = "cluster1-dev"
+  description                     = "example-cluster1-dev"
   enable_vertical_pod_autoscaling = false
   filestore_csi_driver            = true
   horizontal_pod_autoscaling      = true
@@ -52,7 +52,7 @@ module "gke" {
   ]
   monitoring_enable_managed_prometheus = false
   monitoring_service                   = "none"
-  name                                 = "cluster1-dev"
+  name                                 = "example-cluster1-dev"
   network                              = "default"
   network_policy                       = false
   network_project_id                   = ""

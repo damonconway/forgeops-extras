@@ -11,7 +11,7 @@ locals {
 }
 resource "google_compute_address" "ingress" {
   address_type = "EXTERNAL"
-  name         = "cluster1-dev-us-east1"
+  name         = "example-cluster1-dev-us-east1"
 }
 module "ingress_nginx" {
   app        = {}

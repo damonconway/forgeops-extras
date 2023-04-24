@@ -10,8 +10,8 @@ locals {
   }
 }
 resource "google_service_account" "external_secrets" {
-  account_id   = replace(substr("cluster1-dev-external-secrets", 0, 30), "/[^a-z0-9]$/", "")
-  display_name = substr("External Secrets service account for k8s cluster: cluster1-dev", 0, 100)
+  account_id   = replace(substr("example-cluster1-dev-external-secrets", 0, 30), "/[^a-z0-9]$/", "")
+  display_name = substr("External Secrets service account for k8s cluster: example-cluster1-dev", 0, 100)
 }
 resource "google_project_iam_member" "external_secrets_admin" {
   member  = "serviceAccount:${google_service_account.external_secrets.email}"

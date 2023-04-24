@@ -1,15 +1,19 @@
 // TERRAMATE: GENERATED AUTOMATICALLY DO NOT EDIT
 
 module "logstash" {
-  app        = {}
+  app = {
+    deploy = 0
+  }
   namespace  = null
   repository = null
   set = [
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/logstash"
-  values = yamlencode({})
+  source = "../../../../../../../../terramate/modules/helm/logstash"
+  values = [
+    yamlencode({}),
+  ]
 }
 output "chart" {
   value = module.logstash.chart
