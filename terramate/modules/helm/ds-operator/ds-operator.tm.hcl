@@ -17,7 +17,7 @@ generate_hcl "_terramate_generated_helm_ds_operator.tf" {
       app           = global.ds_operator_config.app
       namespace     = global.ds_operator_config.namespace
       repository    = global.ds_operator_config.repository
-      values        = yamlencode(global.ds_operator_config.values)
+      values        = [yamlencode(global.ds_operator_config.values)]
       set           = global.ds_operator_config.set
       set_sensitive = global.ds_operator_config.set_sensitive
     }

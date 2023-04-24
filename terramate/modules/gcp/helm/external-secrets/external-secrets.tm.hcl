@@ -38,10 +38,10 @@ generate_hcl "_terramate_generated_helm_external_secrets.tf" {
     resource "google_service_account_iam_member" "external_secrets_workload_identity_user" {
       service_account_id = google_service_account.external_secrets.name
       role               = "roles/iam.workloadIdentityUser"
-      member             = "serviceAccount:${kubernetes_config_map.gke_data.data.identity_namespace}[external-secrets/external-secrets]"
+      member             = "serviceAccount:${data.kubernetes_config_map.gke_data.data.identity_namespace}[external-secrets/external-secrets]"
     }
 
-    resource "kubernetes_config_map" "gke_data" {
+    data "kubernetes_config_map" "gke_data" {
       metadata {
         name      = global.gke_data_config_map_name
         namespace = global.k8s_data_sharing_namespace
@@ -54,7 +54,7 @@ generate_hcl "_terramate_generated_helm_external_secrets.tf" {
       app           = global.external_secrets_config.app
       namespace     = global.external_secrets_config.namespace
       repository    = global.external_secrets_config.repository
-      values        = [yamlencode(global.external_secrets_config.values), yamlencode(local.values)]
+      values        = flatten([yamlencode(global.external_secrets_config.values), yamlencode(local.values)])
       set           = global.external_secrets_config.set
       set_sensitive = global.external_secrets_config.set_sensitive
     }

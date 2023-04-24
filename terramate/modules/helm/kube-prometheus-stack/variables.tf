@@ -8,12 +8,14 @@ variable "namespace" {
   description = "Name of the k8s namespace to deploy into"
   type        = string
   default     = "kube-prometheus-stack"
+  nullable    = false
 }
 
 variable "repository" {
   description = "Repository URL"
   type        = string
   default     = "https://prometheus-community.github.io/helm-charts"
+  nullable    = false
 }
 
 variable "set" {

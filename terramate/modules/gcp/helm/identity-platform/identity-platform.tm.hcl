@@ -34,7 +34,7 @@ generate_hcl "_terramate_generated_helm_identity_platform.tf" {
       app           = global.identity_platform_config.app
       namespace     = global.identity_platform_config.namespace
       repository    = global.identity_platform_config.repository
-      values        = flatten([yamlencode(local.values), (global.identity_platform_config.values)])
+      values        = flatten([yamlencode(local.values), yamlencode(global.identity_platform_config.values)])
       set           = global.identity_platform_config.set
       set_sensitive = global.identity_platform_config.set_sensitive
     }

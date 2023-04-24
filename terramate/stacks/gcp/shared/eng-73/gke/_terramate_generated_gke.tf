@@ -13,6 +13,18 @@ locals {
   }
   k8s_data_sharing_namespace = "terramate-data"
 }
+provider "kubernetes" {
+  client_certificate     = ""
+  client_key             = ""
+  cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+  host                   = "https://${module.gke.endpoint}"
+  token                  = data.google_client_config.provider.access_token
+  experiments {
+    manifest_resource = true
+  }
+}
+data "google_client_config" "provider" {
+}
 module "gke" {
   cluster_autoscaling = {
     auto_repair         = true
@@ -34,7 +46,7 @@ module "gke" {
   http_load_balancing             = false
   ip_range_pods                   = null
   ip_range_services               = null
-  kubernetes_version              = "latest"
+  kubernetes_version              = "1.25"
   logging_service                 = "none"
   master_authorized_networks = [
   ]
@@ -86,7 +98,12 @@ module "gke" {
   ]
   node_pools_metadata = {}
   node_pools_oauth_scopes = {
-    default = "https://www.googleapis.com/auth/cloud-platform"
+    blue = [
+      "https://www.googleapis.com/auth/cloud-platform",
+    ]
+    green = [
+      "https://www.googleapis.com/auth/cloud-platform",
+    ]
   }
   node_pools_tags   = {}
   node_pools_taints = {}
@@ -106,14 +123,15 @@ resource "kubernetes_namespace" "ns" {
   }
 }
 resource "kubernetes_config_map" "config" {
+  data = {
+    identity_namespace = module.gke.identity_namespace
+  }
   metadata {
-    data = {
-      identity_namespace = module.gke.identity_namespace
-    }
     name      = "gke-data"
     namespace = local.k8s_data_sharing_namespace
   }
 }
 output "cluster" {
-  value = module.gke
+  sensitive = true
+  value     = module.gke
 }

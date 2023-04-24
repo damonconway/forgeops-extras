@@ -113,7 +113,7 @@ generate_hcl "_terramate_generated_helm_cert_manager.tf" {
       app           = global.cert_manager_config.app
       namespace     = global.cert_manager_config.namespace
       repository    = global.cert_manager_config.repository
-      values        = yamlencode(global.cert_manager_config.values)
+      values        = [yamlencode(global.cert_manager_config.values)]
       set           = global.cert_manager_config.set
       set_sensitive = global.cert_manager_config.set_sensitive
     }
@@ -124,17 +124,19 @@ generate_hcl "_terramate_generated_helm_cert_manager.tf" {
       app           = global.cert_manager_cluster_issuers_config.app
       namespace     = global.cert_manager_cluster_issuers_config.namespace
       repository    = global.cert_manager_cluster_issuers_config.repository
-      values        = yamlencode(global.cert_manager_cluster_issuers_config.values)
+      values        = [yamlencode(global.cert_manager_cluster_issuers_config.values)]
       set           = global.cert_manager_cluster_issuers_config.set
       set_sensitive = global.cert_manager_cluster_issuers_config.set_sensitive
     }
 
     output "chart" {
-      value = module.cert_manager.chart
+      value     = module.cert_manager.chart
+      sensitive = true
     }
 
     output "cluster_issuers" {
-      value = module.cluster_issuers.chart
+      value     = module.cluster_issuers.chart
+      sensitive = true
     }
   }
 }

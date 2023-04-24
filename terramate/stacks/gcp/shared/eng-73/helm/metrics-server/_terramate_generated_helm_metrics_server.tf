@@ -9,7 +9,9 @@ module "metrics_server" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/metrics-server"
-  values = yamlencode({})
+  values = [
+    yamlencode({}),
+  ]
 }
 output "chart" {
   value = module.metrics_server.chart

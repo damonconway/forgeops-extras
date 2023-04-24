@@ -24,7 +24,7 @@ resource "google_project_iam_member" "external_dns_admin" {
   role    = "roles/dns.admin"
 }
 resource "google_service_account_iam_member" "external_dns_workload_identity_user" {
-  member             = "serviceAccount:${kubernetes_config_map.gke_data.data.identity_namespace}[external-dns/external-dns]"
+  member             = "serviceAccount:${data.kubernetes_config_map.gke_data.data.identity_namespace}[external-dns/external-dns]"
   role               = "roles/iam.workloadIdentityUser"
   service_account_id = google_service_account.external_dns.name
 }
@@ -43,10 +43,10 @@ module "external_dns" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/external-dns"
-  values = [
+  values = flatten([
     yamlencode({}),
     yamlencode(local.values),
-  ]
+  ])
 }
 output "chart" {
   value = module.external_dns.chart

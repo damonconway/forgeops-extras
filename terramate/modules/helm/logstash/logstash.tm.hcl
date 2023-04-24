@@ -17,7 +17,7 @@ generate_hcl "_terramate_generated_helm_logstash.tf" {
       app           = global.logstash_config.app
       namespace     = global.logstash_config.namespace
       repository    = global.logstash_config.repository
-      values        = yamlencode(global.logstash_config.values)
+      values        = [yamlencode(global.logstash_config.values)]
       set           = global.logstash_config.set
       set_sensitive = global.logstash_config.set_sensitive
     }

@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "raw"
     chart                 = "raw"
     version               = "1.1.0"
@@ -14,7 +15,7 @@ locals {
 
 module "raw" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

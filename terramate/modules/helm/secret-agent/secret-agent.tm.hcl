@@ -17,7 +17,7 @@ generate_hcl "_terramate_generated_helm_secret_agent.tf" {
       app           = global.secret_agent_config.app
       namespace     = global.secret_agent_config.namespace
       repository    = global.secret_agent_config.repository
-      values        = yamlencode(global.secret_agent_config.values)
+      values        = [yamlencode(global.secret_agent_config.values)]
       set           = global.secret_agent_config.set
       set_sensitive = global.secret_agent_config.set_sensitive
     }

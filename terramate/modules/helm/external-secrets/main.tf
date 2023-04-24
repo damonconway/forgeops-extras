@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "external-secrets",
     chart                 = "external-secrets",
     version               = "0.6.0-rc1",
@@ -11,24 +12,12 @@ locals {
     timeout               = 600
   }
 
-  values_defaults = {
-    image = {
-      registry   = "us.gcr.io"
-      repository = "k8s-artifacts-prod/external-dns/external-dns"
-      tag        = "v0.12.2"
-    }
-    sources = [
-      "ingress"
-    ]
-    dryRun   = false
-    loglevel = "info"
-    policy   = "sync"
-  }
+  values_defaults = {}
 }
 
-module "external_dns" {
+module "external_secrets" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

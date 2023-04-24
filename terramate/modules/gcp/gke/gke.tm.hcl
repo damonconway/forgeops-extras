@@ -65,7 +65,7 @@ globals {
     ]
 
     node_pools_oauth_scopes = {
-      default = "https://www.googleapis.com/auth/cloud-platform"
+      default = ["https://www.googleapis.com/auth/cloud-platform"]
     }
     node_pools_labels   = {}
     node_pools_metadata = {}
@@ -81,6 +81,19 @@ generate_hcl "_terramate_generated_gke.tf" {
       cluster_resource_labels    = global.gke_config.cluster_resource_labels
       k8s_data_sharing_namespace = global.k8s_data_sharing_namespace
     }
+
+    provider "kubernetes" {
+      host                   = "https://${module.gke.endpoint}"
+      cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+      client_certificate     = ""
+      client_key             = ""
+      token                  = data.google_client_config.provider.access_token
+      experiments {
+        manifest_resource = true
+      }
+    }
+
+    data "google_client_config" "provider" {}
 
     module "gke" {
       source  = "terraform-google-modules/kubernetes-engine/google"
@@ -127,15 +140,16 @@ generate_hcl "_terramate_generated_gke.tf" {
       metadata {
         name      = global.gke_data_config_map_name
         namespace = local.k8s_data_sharing_namespace
+      }
 
-        data = {
-          identity_namespace = module.gke.identity_namespace
-        }
+      data = {
+        identity_namespace = module.gke.identity_namespace
       }
     }
 
     output "cluster" {
-      value = module.gke
+      value     = module.gke
+      sensitive = true
     }
   }
 }

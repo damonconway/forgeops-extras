@@ -8,12 +8,14 @@ variable "namespace" {
   description = "Name of the k8s namespace to deploy into"
   type        = string
   default     = "ingress-nginx"
+  nullable    = false
 }
 
 variable "repository" {
   description = "Repository URL"
   type        = string
   default     = "https://kubernetes.github.io/ingress-nginx"
+  nullable    = false
 }
 
 variable "set" {

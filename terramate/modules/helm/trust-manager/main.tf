@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "trust-manager"
     chart                 = "trust-manager"
     version               = "v0.3.0"
@@ -31,7 +32,7 @@ locals {
 
 module "trust_manager" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

@@ -14,7 +14,8 @@ variable "app" {
 variable "repository" {
   description = "Repository URL"
   type        = string
-  default     = "https://charts.jetstack.io"
+  default     = "https://bedag.github.io/helm-charts"
+  nullable    = false
 }
 
 variable "set" {

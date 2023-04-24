@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "ingress-nginx",
     chart                 = "ingress-nginx",
     version               = "4.1.1",
@@ -35,7 +36,7 @@ locals {
 
 module "ingress_nginx" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

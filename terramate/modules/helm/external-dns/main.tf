@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "external-dns",
     chart                 = "external-dns",
     version               = "6.9.0",
@@ -28,7 +29,7 @@ locals {
 
 module "external_dns" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

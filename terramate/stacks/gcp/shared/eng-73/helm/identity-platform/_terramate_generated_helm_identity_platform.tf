@@ -26,7 +26,7 @@ module "identity_platform" {
   source = "../../../../../../../terramate/modules/helm/identity-platform"
   values = flatten([
     yamlencode(local.values),
-    ({
+    yamlencode({
       ds_cts = {
         kind = "DirectoryService"
         volumeClaimSpec = {

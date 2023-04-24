@@ -9,7 +9,9 @@ module "secret_agent" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/secret-agent"
-  values = yamlencode({})
+  values = [
+    yamlencode({}),
+  ]
 }
 output "chart" {
   value = module.secret_agent.chart

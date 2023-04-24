@@ -17,7 +17,7 @@ generate_hcl "_terramate_generated_helm_raw.tf" {
       app           = global.raw_config.app
       namespace     = global.raw_config.namespace
       repository    = global.raw_config.repository
-      values        = yamlencode(global.raw_config.values)
+      values        = [yamlencode(global.raw_config.values)]
       set           = global.raw_config.set
       set_sensitive = global.raw_config.set_sensitive
     }

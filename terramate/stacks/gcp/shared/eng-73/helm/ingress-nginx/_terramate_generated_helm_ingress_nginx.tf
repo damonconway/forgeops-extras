@@ -22,10 +22,10 @@ module "ingress_nginx" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/ingress-nginx"
-  values = [
+  values = flatten([
     yamlencode({}),
     yamlencode(local.values),
-  ]
+  ])
 }
 output "chart" {
   value = module.ingress_nginx.chart

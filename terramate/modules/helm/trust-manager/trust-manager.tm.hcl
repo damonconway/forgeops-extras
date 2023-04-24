@@ -17,7 +17,7 @@ generate_hcl "_terramate_generated_helm_trust_manager.tf" {
       app           = global.trust_manager_config.app
       namespace     = global.trust_manager_config.namespace
       repository    = global.trust_manager_config.repository
-      values        = yamlencode(global.trust_manager_config.values)
+      values        = [yamlencode(global.trust_manager_config.values)]
       set           = global.trust_manager_config.set
       set_sensitive = global.trust_manager_config.set_sensitive
     }

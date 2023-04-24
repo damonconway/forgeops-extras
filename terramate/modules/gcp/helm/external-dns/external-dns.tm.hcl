@@ -40,7 +40,7 @@ generate_hcl "_terramate_generated_helm_external_dns.tf" {
     resource "google_service_account_iam_member" "external_dns_workload_identity_user" {
       service_account_id = google_service_account.external_dns.name
       role               = "roles/iam.workloadIdentityUser"
-      member             = "serviceAccount:${kubernetes_config_map.gke_data.data.identity_namespace}[external-dns/external-dns]"
+      member             = "serviceAccount:${data.kubernetes_config_map.gke_data.data.identity_namespace}[external-dns/external-dns]"
     }
 
     data "kubernetes_config_map" "gke_data" {
@@ -56,7 +56,7 @@ generate_hcl "_terramate_generated_helm_external_dns.tf" {
       app           = global.external_dns_config.app
       namespace     = global.external_dns_config.namespace
       repository    = global.external_dns_config.repository
-      values        = [yamlencode(global.external_dns_config.values), yamlencode(local.values)]
+      values        = flatten([yamlencode(global.external_dns_config.values), yamlencode(local.values)])
       set           = global.external_dns_config.set
       set_sensitive = global.external_dns_config.set_sensitive
     }

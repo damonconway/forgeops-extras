@@ -8,12 +8,14 @@ variable "namespace" {
   description = "Name of the k8s namespace to deploy into"
   type        = string
   default     = "kube-system"
+  nullable    = false
 }
 
 variable "repository" {
   description = "Repository URL"
   type        = string
   default     = "https://kubernetes-sigs.github.io/metrics-server"
+  nullable    = false
 }
 
 variable "set" {

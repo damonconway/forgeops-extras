@@ -8,12 +8,14 @@ variable "namespace" {
   description = "Name of the k8s namespace to deploy into"
   type        = string
   default     = "external-dns"
+  nullable    = false
 }
 
 variable "repository" {
   description = "Repository URL"
   type        = string
   default     = "https://charts.bitnami.com/bitnami"
+  nullable    = false
 }
 
 variable "set" {

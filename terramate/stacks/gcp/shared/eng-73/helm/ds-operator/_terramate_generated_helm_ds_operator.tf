@@ -9,7 +9,9 @@ module "ds_operator" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/ds-operator"
-  values = yamlencode({})
+  values = [
+    yamlencode({}),
+  ]
 }
 output "chart" {
   value = module.ds_operator.chart

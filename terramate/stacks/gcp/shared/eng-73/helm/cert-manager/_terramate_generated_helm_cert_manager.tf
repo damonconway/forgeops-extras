@@ -9,7 +9,9 @@ module "cert_manager" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/cert-manager"
-  values = yamlencode({})
+  values = [
+    yamlencode({}),
+  ]
 }
 module "cluster_issuers" {
   app        = {}
@@ -20,89 +22,93 @@ module "cluster_issuers" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/raw"
-  values = yamlencode({
-    resources = [
-      {
-        apiVersion = "cert-manager.io/v1"
-        kind       = "ClusterIssuer"
-        metadata = {
-          name = "default-issuer"
-        }
-        spec = {
-          acme = {
-            email = "forgeops-team@forgerock.com"
-            privateKeySecretRef = {
-              name = "letsencrypt-default"
-            }
-            server = "https://acme-v02.api.letsencrypt.org/directory"
-            solvers = [
-              {
-                http01 = {
-                  ingress = {
-                    class = "nginx"
-                  }
-                }
-              },
-            ]
+  values = [
+    yamlencode({
+      resources = [
+        {
+          apiVersion = "cert-manager.io/v1"
+          kind       = "ClusterIssuer"
+          metadata = {
+            name = "default-issuer"
           }
-        }
-      },
-      {
-        apiVersion = "cert-manager.io/v1"
-        kind       = "ClusterIssuer"
-        metadata = {
-          name = "letsencrypt-production"
-        }
-        spec = {
-          acme = {
-            email = "forgeops-team@forgerock.com"
-            privateKeySecretRef = {
-              name = "letsencrypt-production"
-            }
-            server = "https://acme-v02.api.letsencrypt.org/directory"
-            solvers = [
-              {
-                http01 = {
-                  ingress = {
-                    class = "nginx"
+          spec = {
+            acme = {
+              email = "forgeops-team@forgerock.com"
+              privateKeySecretRef = {
+                name = "letsencrypt-default"
+              }
+              server = "https://acme-v02.api.letsencrypt.org/directory"
+              solvers = [
+                {
+                  http01 = {
+                    ingress = {
+                      class = "nginx"
+                    }
                   }
-                }
-              },
-            ]
-          }
-        }
-      },
-      {
-        apiVersion = "cert-manager.io/v1"
-        kind       = "ClusterIssuer"
-        metadata = {
-          name = "letsencrypt-staging"
-        }
-        spec = {
-          acme = {
-            email = "forgeops-team@forgerock.com"
-            privateKeySecretRef = {
-              name = "letsencrypt-staging"
+                },
+              ]
             }
-            server = "https://acme-staging-v02.api.letsencrypt.org/directory"
-            solvers = [
-              {
-                http01 = {
-                  ingress = {
-                    class = "nginx"
-                  }
-                }
-              },
-            ]
           }
-        }
-      },
-    ]
-  })
+        },
+        {
+          apiVersion = "cert-manager.io/v1"
+          kind       = "ClusterIssuer"
+          metadata = {
+            name = "letsencrypt-production"
+          }
+          spec = {
+            acme = {
+              email = "forgeops-team@forgerock.com"
+              privateKeySecretRef = {
+                name = "letsencrypt-production"
+              }
+              server = "https://acme-v02.api.letsencrypt.org/directory"
+              solvers = [
+                {
+                  http01 = {
+                    ingress = {
+                      class = "nginx"
+                    }
+                  }
+                },
+              ]
+            }
+          }
+        },
+        {
+          apiVersion = "cert-manager.io/v1"
+          kind       = "ClusterIssuer"
+          metadata = {
+            name = "letsencrypt-staging"
+          }
+          spec = {
+            acme = {
+              email = "forgeops-team@forgerock.com"
+              privateKeySecretRef = {
+                name = "letsencrypt-staging"
+              }
+              server = "https://acme-staging-v02.api.letsencrypt.org/directory"
+              solvers = [
+                {
+                  http01 = {
+                    ingress = {
+                      class = "nginx"
+                    }
+                  }
+                },
+              ]
+            }
+          }
+        },
+      ]
+    }),
+  ]
 }
 output "chart" {
-  value = module.cert_manager.chart
+  sensitive = true
+  value     = module.cert_manager.chart
 }
 output "cluster_issuers" {
-  value = module.cluster_issuers.chart
+  sensitive = true
+  value     = module.cluster_issuers.chart
 }

@@ -1,8 +1,9 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "ds-operator"
     chart                 = "ds-operator"
-    version               = "v1.1.6"
+    version               = "v0.2.5"
     create_namespace      = true
     reuse_values          = false
     reset_values          = true
@@ -15,9 +16,9 @@ locals {
   values_defaults = {}
 }
 
-module "secret_agent" {
+module "ds_operator" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

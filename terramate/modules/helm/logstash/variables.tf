@@ -8,12 +8,14 @@ variable "namespace" {
   description = "Name of the k8s namespace to deploy into"
   type        = string
   default     = "elk-stack"
+  nullable    = false
 }
 
 variable "repository" {
   description = "Repository URL"
   type        = string
   default     = "https://helm.elastic.co"
+  nullable    = false
 }
 
 variable "set" {

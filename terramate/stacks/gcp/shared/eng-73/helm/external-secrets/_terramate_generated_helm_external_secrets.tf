@@ -19,11 +19,11 @@ resource "google_project_iam_member" "external_secrets_admin" {
   role    = "roles/secretmanager.admin"
 }
 resource "google_service_account_iam_member" "external_secrets_workload_identity_user" {
-  member             = "serviceAccount:${kubernetes_config_map.gke_data.data.identity_namespace}[external-secrets/external-secrets]"
+  member             = "serviceAccount:${data.kubernetes_config_map.gke_data.data.identity_namespace}[external-secrets/external-secrets]"
   role               = "roles/iam.workloadIdentityUser"
   service_account_id = google_service_account.external_secrets.name
 }
-resource "kubernetes_config_map" "gke_data" {
+data "kubernetes_config_map" "gke_data" {
   metadata {
     name      = "gke-data"
     namespace = "terramate-data"
@@ -38,10 +38,10 @@ module "external_secrets" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/external-secrets"
-  values = [
+  values = flatten([
     yamlencode({}),
     yamlencode(local.values),
-  ]
+  ])
 }
 output "chart" {
   value = module.external_secrets.chart

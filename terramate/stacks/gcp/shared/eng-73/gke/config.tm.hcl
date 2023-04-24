@@ -1,4 +1,6 @@
 globals "gke_config" {
+  kubernetes_version = "1.25"
+
   node_pools = [
     {
       name               = "default"
@@ -45,4 +47,9 @@ globals "gke_config" {
       preemptible        = false
     }
   ]
+
+  node_pools_oauth_scopes = {
+    blue  = ["https://www.googleapis.com/auth/cloud-platform"]
+    green = ["https://www.googleapis.com/auth/cloud-platform"]
+  }
 }

@@ -17,4 +17,8 @@ globals {
   ingress_class              = "nginx"
   k8s_data_sharing_namespace = "terramate-data"
   letsencrypt_email          = "forgeops-team@forgerock.com"
+
+  # Provider versions
+  terraform_helm_provider_version       = "~> 2.7"
+  terraform_kubernetes_provider_version = "~> 2.16"
 }

@@ -17,7 +17,7 @@ generate_hcl "_terramate_generated_helm_metrics_server.tf" {
       app           = global.metrics_server_config.app
       namespace     = global.metrics_server_config.namespace
       repository    = global.metrics_server_config.repository
-      values        = yamlencode(global.metrics_server_config.values)
+      values        = [yamlencode(global.metrics_server_config.values)]
       set           = global.metrics_server_config.set
       set_sensitive = global.metrics_server_config.set_sensitive
     }

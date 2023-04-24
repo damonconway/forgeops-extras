@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "kibana"
     chart                 = "kibana"
     version               = "7.17.3"
@@ -16,7 +17,7 @@ locals {
 
 module "kibana" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

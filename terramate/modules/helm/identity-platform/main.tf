@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "identity-platform"
     chart                 = "identity-platform"
     version               = null
@@ -9,7 +10,7 @@ locals {
     force_update          = true
     max_history           = 12
     render_subchart_notes = false
-    timeout               = 600
+    timeout               = 1200
   }
 
   values_defaults = {
@@ -36,8 +37,9 @@ locals {
 }
 
 module "identity_platform" {
-  source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  source = "github.com/damonconway/terraform-helm-release?ref=add_timeout"
+  #source  = "terraform-module/release/helm"
+  #version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

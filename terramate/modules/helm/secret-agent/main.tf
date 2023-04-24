@@ -1,5 +1,6 @@
 locals {
   app_defaults = {
+    deploy                = 1
     name                  = "secret-agent"
     chart                 = "secret-agent"
     version               = "v1.1.6"
@@ -17,7 +18,7 @@ locals {
 
 module "secret_agent" {
   source  = "terraform-module/release/helm"
-  version = "2.6.0"
+  version = "2.8.0"
 
   namespace     = var.namespace
   repository    = var.repository

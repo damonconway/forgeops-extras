@@ -9,7 +9,9 @@ module "kube_prometheus_stack" {
   set_sensitive = [
   ]
   source = "../../../../../../../terramate/modules/helm/kube-prometheus-stack"
-  values = yamlencode({})
+  values = [
+    yamlencode({}),
+  ]
 }
 output "chart" {
   value = module.kube_prometheus_stack.chart

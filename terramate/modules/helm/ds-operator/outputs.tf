@@ -1,3 +1,3 @@
 output "chart" {
-  value = module.secret_agent
+  value = module.ds_operator
 }

@@ -17,7 +17,7 @@ generate_hcl "_terramate_generated_helm_elasticsearch.tf" {
       app           = global.elasticsearch_config.app
       namespace     = global.elasticsearch_config.namespace
       repository    = global.elasticsearch_config.repository
-      values        = yamlencode(global.elasticsearch_config.values)
+      values        = [yamlencode(global.elasticsearch_config.values)]
       set           = global.elasticsearch_config.set
       set_sensitive = global.elasticsearch_config.set_sensitive
     }

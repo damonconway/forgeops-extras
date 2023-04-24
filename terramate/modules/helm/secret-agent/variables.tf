@@ -8,12 +8,14 @@ variable "namespace" {
   description = "Name of the k8s namespace to deploy into"
   type        = string
   default     = "secret-agent"
+  nullable    = false
 }
 
 variable "repository" {
   description = "Repository URL"
   type        = string
   default     = "oci://us-docker.pkg.dev/forgeops-public/charts"
+  nullable    = false
 }
 
 variable "set" {

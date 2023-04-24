@@ -8,12 +8,20 @@ variable "namespace" {
   description = "Name of the k8s namespace to deploy into"
   type        = string
   default     = "cert-manager"
+  nullable    = false
 }
 
 variable "repository" {
   description = "Repository URL"
   type        = string
   default     = "https://charts.jetstack.io"
+  nullable    = false
+}
+
+variable "repository_config" {
+  description = "Repository Configuration"
+  type        = map(any)
+  default     = {}
 }
 
 variable "set" {

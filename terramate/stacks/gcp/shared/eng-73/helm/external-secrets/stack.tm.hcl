@@ -2,6 +2,7 @@ stack {
   name = "External Secrets chart"
 
   after = [
-    "../../gke"
+    "../../gke",
+    "../ingress-nginx"
   ]
 }
