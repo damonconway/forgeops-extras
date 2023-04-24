@@ -1,3 +1,3 @@
 globals {
-  cluster_name = "eng-73-${global.environment}"
+  cluster_name = "cluster1-${global.environment}"
 }
