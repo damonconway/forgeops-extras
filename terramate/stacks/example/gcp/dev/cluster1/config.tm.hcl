@@ -1,3 +1,3 @@
 globals {
-  cluster_name = "cluster1-${global.environment}"
+  cluster_name = "${global.resource_prefix}cluster1-${global.environment}"
 }
