@@ -1,1 +1,5 @@
-globals "kibana_config" {}
+globals "kibana_config" {
+  app = {
+    deploy = 0
+  }
+}

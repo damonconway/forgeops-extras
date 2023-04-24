@@ -8,7 +8,7 @@ module "cert_manager" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/cert-manager"
+  source = "../../../../../../../../terramate/modules/helm/cert-manager"
   values = [
     yamlencode({}),
   ]
@@ -21,7 +21,7 @@ module "cluster_issuers" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/raw"
+  source = "../../../../../../../../terramate/modules/helm/raw"
   values = [
     yamlencode({
       resources = [

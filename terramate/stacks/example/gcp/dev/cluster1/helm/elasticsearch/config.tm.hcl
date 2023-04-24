@@ -1,1 +1,5 @@
-globals "elasticsearch_config" {}
+globals "elasticsearch_config" {
+  app = {
+    deploy = 0
+  }
+}

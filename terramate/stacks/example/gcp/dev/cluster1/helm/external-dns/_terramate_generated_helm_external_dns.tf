@@ -6,7 +6,7 @@ locals {
     google = {
       project = "engineering-devops"
     }
-    txtOwnerId = "eng-73-shared.us-east1"
+    txtOwnerId = "cluster1-dev.us-east1"
     serviceAccount = {
       annotations = {
         "iam.gke.io/gcp-service-account" = google_service_account.external_dns.email
@@ -15,8 +15,8 @@ locals {
   }
 }
 resource "google_service_account" "external_dns" {
-  account_id   = replace(substr("eng-73-shared-external-dns", 0, 30), "/[^a-z0-9]$/", "")
-  display_name = substr("ExternalDNS service account for k8s cluster: eng-73-shared", 0, 100)
+  account_id   = replace(substr("cluster1-dev-external-dns", 0, 30), "/[^a-z0-9]$/", "")
+  display_name = substr("ExternalDNS service account for k8s cluster: cluster1-dev", 0, 100)
 }
 resource "google_project_iam_member" "external_dns_admin" {
   member  = "serviceAccount:${google_service_account.external_dns.email}"
@@ -42,7 +42,7 @@ module "external_dns" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/external-dns"
+  source = "../../../../../../../../terramate/modules/helm/external-dns"
   values = flatten([
     yamlencode({}),
     yamlencode(local.values),

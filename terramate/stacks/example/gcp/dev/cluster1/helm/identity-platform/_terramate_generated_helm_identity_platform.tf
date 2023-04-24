@@ -13,7 +13,7 @@ locals {
   }
 }
 data "google_compute_address" "ingress" {
-  name = "eng-73-shared-us-east1"
+  name = "cluster1-dev-us-east1"
 }
 module "identity_platform" {
   app        = {}
@@ -23,7 +23,7 @@ module "identity_platform" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/identity-platform"
+  source = "../../../../../../../../terramate/modules/helm/identity-platform"
   values = flatten([
     yamlencode(local.values),
     yamlencode({

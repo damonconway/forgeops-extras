@@ -8,7 +8,7 @@ data "google_client_config" "provider" {
 }
 data "google_container_cluster" "cluster" {
   location = "us-east1"
-  name     = "eng-73-shared"
+  name     = "cluster1-dev"
 }
 provider "kubernetes" {
   client_certificate     = local.client_certificate_enc

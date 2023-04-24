@@ -8,7 +8,7 @@ module "secret_agent" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/secret-agent"
+  source = "../../../../../../../../terramate/modules/helm/secret-agent"
   values = [
     yamlencode({}),
   ]

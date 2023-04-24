@@ -8,7 +8,7 @@ module "metrics_server" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/metrics-server"
+  source = "../../../../../../../../terramate/modules/helm/metrics-server"
   values = [
     yamlencode({}),
   ]

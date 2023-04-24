@@ -8,7 +8,7 @@ module "ds_operator" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/ds-operator"
+  source = "../../../../../../../../terramate/modules/helm/ds-operator"
   values = [
     yamlencode({}),
   ]

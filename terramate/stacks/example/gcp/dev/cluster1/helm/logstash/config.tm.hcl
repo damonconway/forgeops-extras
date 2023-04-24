@@ -1,1 +1,5 @@
-globals "logstash_config" {}
+globals "logstash_config" {
+  app = {
+    deploy = 0
+  }
+}

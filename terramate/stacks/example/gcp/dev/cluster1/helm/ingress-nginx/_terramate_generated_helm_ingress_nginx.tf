@@ -11,7 +11,7 @@ locals {
 }
 resource "google_compute_address" "ingress" {
   address_type = "EXTERNAL"
-  name         = "eng-73-shared-us-east1"
+  name         = "cluster1-dev-us-east1"
 }
 module "ingress_nginx" {
   app        = {}
@@ -21,7 +21,7 @@ module "ingress_nginx" {
   ]
   set_sensitive = [
   ]
-  source = "../../../../../../../terramate/modules/helm/ingress-nginx"
+  source = "../../../../../../../../terramate/modules/helm/ingress-nginx"
   values = flatten([
     yamlencode({}),
     yamlencode(local.values),
