@@ -29,7 +29,7 @@ locals {
 
 module "external_dns" {
   source  = "terraform-module/release/helm"
-  version = "2.8.0"
+  version = "2.8.1"
 
   namespace     = var.namespace
   repository    = var.repository
