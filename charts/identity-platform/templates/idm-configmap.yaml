@@ -8,6 +8,8 @@ metadata:
     {{- with .Values.idm.podLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
+  annotations:
+    "helm.sh/hook": "pre-install, pre-upgrade"
 data:
   IDM_ENVCONFIG_DIRS: /opt/openidm/resolver
   LOGGING_PROPERTIES: /var/run/openidm/logging/logging.properties
@@ -32,12 +34,27 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: idm-config
+  labels:
+    {{- include "identity-platform.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "pre-install, pre-upgrade"
+binaryData:
+{{- range $path, $_ := .Files.Glob "files/idm/conf/**" }}
+  {{ $path | replace "files/idm/" "" | sha256sum }}: {{ $.Files.Get $path | b64enc }}
+{{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: idm-logging-properties
   labels:
     {{- include "identity-platform.labels" . | nindent 4 }}
     {{- with .Values.idm.podLabels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
+  annotations:
+    "helm.sh/hook": "pre-install, pre-upgrade"
 data:
   logging.properties: |
     # Properties file that configures the operation of the JDK

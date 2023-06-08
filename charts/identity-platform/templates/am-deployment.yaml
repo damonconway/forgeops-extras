@@ -43,7 +43,8 @@ spec:
         {{- toYaml .Values.am.podSecurityContext | nindent 8 }}
       volumes:
         - name: fbc
-          emptyDir: {}
+          configMap:
+            name: am-config
         - name: am-secrets
           projected:
             sources:
@@ -67,8 +68,11 @@ spec:
           image: "{{ .Values.am.image.repository }}:{{ .Values.am.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.am.image.pullPolicy }}
           volumeMounts:
-          - mountPath: /fbc
-            name: fbc
+          {{- range $path, $_ := .Files.Glob "files/am/config/**" }}
+          - name: fbc
+            mountPath: /fbc/config/{{ $path | replace "files/am/" "" }}
+            subPath: {{ $path | replace "files/am/" "" | sha256sum }}
+          {{- end }}
           command:
           - /bin/bash
           - -c
@@ -164,8 +168,11 @@ spec:
             mountPath: /var/run/secrets/am
           - name: amster-key
             mountPath: /var/run/secrets/amster
+          {{- range $path, $_ := .Files.Glob "files/am/config/**" }}
           - name: fbc
-            mountPath: /home/forgerock/openam
+            mountPath: /home/forgerock/openam/config/{{ $path | replace "files/am/" "" }}
+            subPath: {{ $path | replace "files/am/" "" | sha256sum }}
+          {{- end }}
       {{- with .Values.am.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

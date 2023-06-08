@@ -1,0 +1,14 @@
+{{- if .Values.am.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: am-config
+  labels:
+    {{- include "identity-platform.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "pre-install, pre-upgrade"
+binaryData:
+{{- range $path, $_ := .Files.Glob ".Values.platform.config_profile_path/am/config/**" }}
+  {{ $path | replace ".Values.platform.config_profile/am/" "" | sha256sum }}: {{ $.Files.Get $path | b64enc }}
+{{- end }}
+{{- end }}

@@ -14,6 +14,7 @@ serviceAccount:
   name: ""
 
 platform:
+  config_profile_path: "files"
   ingress:
     enabled: true
     className: "nginx"
@@ -254,7 +255,7 @@ amster:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
-  
+
   env:
     DURATION: "10"
 
@@ -753,4 +754,3 @@ ds_cts:
   service:
     type: ClusterIP
     port: 8080
-

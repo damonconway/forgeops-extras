@@ -60,3 +60,8 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Set a variable for config_profile_path
+*/}}
+{{- $config_profile_path := .Values.platform.config_profile_path }}

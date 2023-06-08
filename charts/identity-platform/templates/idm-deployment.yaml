@@ -42,6 +42,9 @@ spec:
       securityContext:
         {{- toYaml .Values.idm.podSecurityContext | nindent 8 }}
       volumes:
+        - name: fbc-cm
+          configMap:
+            name: idm-config
         - name: fbc
           emptyDir: {}
         - name: idm-secrets

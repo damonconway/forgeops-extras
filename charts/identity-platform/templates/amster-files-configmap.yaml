@@ -4,6 +4,8 @@ metadata:
   name: amster-config
   labels:
     {{- include "identity-platform.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "pre-install, pre-upgrade"
 binaryData:
 {{- range $path, $_ := .Files.Glob "files/amster/config/**" }}
   {{ $path | replace "files/amster/" "" | sha256sum }}: {{ $.Files.Get $path | b64enc }}
