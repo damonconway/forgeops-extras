@@ -1,0 +1,7 @@
+helmGlobals:
+  chartHome: ./charts
+helmCharts:
+  - name: identity-platform
+    releaseName: "ds-snapshot"
+    namespace: "prod"
+    valuesFile: values.yaml
